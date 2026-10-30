@@ -1,0 +1,81 @@
+/* --- Global Styles --- */
+html {
+    scroll-behavior: smooth; /* Membuat animasi perpindahan menu menjadi halus */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333333;
+}
+
+/* --- Navbar Customization --- */
+.navbar {
+    background-color: #212529 !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 160px 0;
+}
+
+.hero-section h1 {
+    font-weight: 700;
+}
+
+/* --- Section Padding --- */
+.section-padding {
+    padding: 90px 0;
+}
+
+/* --- Card Services & Hover Effects --- */
+.card-service {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.card-service:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* --- Portfolio & Team Cards --- */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    transition: transform 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.03);
+}
+
+/* --- Forms --- */
+.form-control {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    border-color: #0d6efd;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #1a1e21;
+    font-size: 0.9rem;
+}

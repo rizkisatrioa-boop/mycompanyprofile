@@ -1,0 +1,15 @@
+#home.hero {
+    width: 100%;
+    height: 100vh;
+    background-image: url('kuku.jpeg'); 
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+    
+    /* Tambahkan baris di bawah ini */
+    display: flex;
+    justify-content: center; /* Posisi ke tengah horizontal */
+    align-items: center;     /* Posisi ke tengah vertikal */
+    text-align: center;      /* Rata tengah teks */
+}
+

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Kegiatan - Paskibra Satuan</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #b30000 0%, #800000 100%);
+            color: white;
+            padding: 100px 0 60px 0;
+            text-align: center;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .filter-btn {
+            border-radius: 50px;
+            font-weight: 500;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+        .gallery-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            background: white;
+        }
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        .gallery-img-wrapper {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-card:hover .gallery-img {
+            transform: scale(1.08);
+        }
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+        .gallery-overlay i {
+            color: white;
+            font-size: 2rem;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        .gallery-card:hover .gallery-overlay i {
+            transform: scale(1);
+        }
+        .footer {
+            background-color: #212529;
+            color: #adb5bd;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="paskibra.html">
+                <i class="fa-solid fa-flag text-danger me-2"></i> PASKIBRA SATUAN
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="eskul.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="eskul.html">Tentang Kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="eskul.html#kegiatan">Kegiatan</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="galeri.html">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header-section">
+        <div class="container">
+            <span class="badge bg-white text-danger px-3 py-2 rounded-pill mb-3 fw-bold shadow-sm">Dokumentasi Aksi</span>
+            <h1 class="display-5 fw-bold mb-2">Galeri Foto & Dokumentasi</h1>
+            <p class="lead text-white-50 mb-0">Jejak langkah, kedisiplinan, dan kebersamaan pasukan dalam setiap momen berharga.</p>
+        </div>
+    </header>
+
+    <!-- Main Content & Filter Bar -->
+    <main class="py-5">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+                <button class="btn btn-outline-dark filter-btn active" onclick="filterGallery('all')">Semua Momen</button>
+                <button class="btn btn-outline-dark filter-btn" onclick="filterGallery('latihan')">Latihan Rutin</button>
+                <button class="btn btn-outline-dark filter-btn" onclick="filterGallery('upacara')">Upacara</button>
+                <button class="btn btn-outline-dark filter-btn" onclick="filterGallery('lomba')">Perlombaan</button>
+                <button class="btn btn-outline-dark filter-btn" onclick="filterGallery('kebersamaan')">Kebersamaan</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="row g-4" id="galleryGrid">
+                
+                <!-- Item 1: Upacara -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="upacara">
+                    <div class="gallery-card" onclick="openLightbox('https://placehold.co/800x600/dc3545/ffffff?text=Upacara+Bendera+Senin', 'Pengibaran Bendera Merah Putih pada Upacara Hari Senin di Lapangan Utama.')">
+                        <div class="gallery-img-wrapper">
+                            <img src="https://placehold.co/600x400/dc3545/ffffff?text=Upacara+Bendera" alt="Upacara Bendera" class="gallery-img" onerror="this.src='https://placehold.co/600x400/ccc/333?text=Image'">
+                            <div class="gallery-overlay">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="badge bg-danger mb-2">Upacara</span>
+                            <h5 class="fw-bold mb-1 fs-6">Petugas Pengibar Bendera Senin</h5>
+                            <p class="text-muted small mb-0">Formasi lengkap pengibaran bendera mingguan sekolah.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Latihan -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="latihan">
+                    <div class="gallery-card" onclick="openLightbox('https://placehold.co/800x600/b30000/ffffff?text=Latihan+Baris+Berbaris', 'Sesi latihan rutin baris-berbaris untuk memperkuat ketepatan aba-aba.')">
+                        <div class="gallery-img-wrapper">
+                            <img src="https://placehold.co/600x400/b30000/ffffff?text=Latihan+Rutin" alt="Latihan Rutin" class="gallery-img" onerror="this.src='https://placehold.co/600x400/ccc/333?text=Image'">
+                            <div class="gallery-overlay">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="badge bg-warning text-dark mb-2">Latihan Rutin</span>
+                            <h5 class="fw-bold mb-1 fs-6">Latihan Ketepatan Langkah</h5>
+                            <p class="text-muted small mb-0">Pembinaan teknik dasar PBB dan formasi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Lomba -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="lomba">
+                    <div class="gallery-card" onclick="openLightbox('https://placehold.co/800x600/800000/ffffff?text=Kompetisi+LKBB+Regional', 'Aksi pasukan saat mengikuti ajang Lomba Ketangkasan Baris-Berbaris tingkat kota.')">
+                        <div class="gallery-img-wrapper">
+                            <img src="https://placehold.co/600x400/800000/ffffff?text=Kompetisi+LKBB" alt="Kompetisi LKBB" class="gallery-img" onerror="this.src='https://placehold.co/600x400/ccc/333?text=Image'">
+                            <div class="gallery-overlay">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="badge bg-success mb-2">Perlombaan</span>
+                            <h5 class="fw-bold mb-1 fs-6">Aksi Panggung LKBB Regional</h5>
+                            <p class="text-muted small mb-0">Penampilan penuh percaya diri di hadapan juri dan penonton.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Kebersamaan -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="kebersamaan">
+                    <div class="gallery-card" onclick="openLightbox('https://placehold.co/800x600/a71d2a/ffffff?text=Makrab+dan+Keakraban', 'Momen kebersamaan dan kekeluargaan seluruh anggota senior dan junior.')">
+                        <div class="gallery-img-wrapper">
+                            <img src="https://placehold.co/600x400/a71d2a/ffffff?text=Kebersamaan" alt="Kebersamaan" class="gallery-img" onerror="this.src='https://placehold.co/600x400/ccc/333?text=Image'">
+                            <div class="gallery-overlay">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="badge bg-info text-dark mb-2">Kebersamaan</span>
+                            <h5 class="fw-bold mb-1 fs-6">Gathering & Keakraban Anggota</h5>
+                            <p class="text-muted small mb-0">Mempererat ikatan emosional antar angkatan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Latihan -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="latihan">
+                    <div class="gallery-card" onclick="openLightbox('https://placehold.co/800x600/660000/ffffff?text=Latihan+Fisik+Korsa', 'Pembinaan fisik untuk menjaga stamina dan kesehatan tubuh anggota.')">
+                        <div class="gallery-img-wrapper">
+                            <img src="https://placehold.co/600x400/660000/ffffff?text=Formasi+Pasukan" alt="Formasi Pasukan" class="gallery-img" onerror="this.src='https://placehold.co/600x400/ccc/333?text=Image'">
+                            <div class="gallery-overlay">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="badge bg-warning text-dark mb-2">Latihan Rutin</span>
+                            <h5 class="fw-bold mb-1 fs-6">Latihan Fisik & Kesamaptaan</h5>
+                            <p class="text-muted small mb-0">Membangun fisik yang kuat dan bermental baja.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6: Upacara -->
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="upacara">
+                    <div class="gallery-card" onclick="openLightbox('https://placehold.co/800x600/4d0000/ffffff?text=Penurunan+Bendera', 'Upacara penurunan bendera Merah Putih sore hari dengan khidmat.')">
+                        <div class="gallery-img-wrapper">
+                            <img src="https://placehold.co/600x400/4d0000/ffffff?text=Pelantikan+Anggota" alt="Pelantikan" class="gallery-img" onerror="this.src='https://placehold.co/600x400/ccc/333?text=Image'">
+                            <div class="gallery-overlay">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="badge bg-danger mb-2">Upacara</span>
+                            <h5 class="fw-bold mb-1 fs-6">Pengukuhan & Pelantikan Anggota</h5>
+                            <p class="text-muted small mb-0">Prosesi penyematan badge kehormatan pasukan.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-0">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pt-2 pb-4">
+                    <img id="lightboxImage" src="" alt="Zoomed Image" class="img-fluid rounded mb-3" style="max-height: 70vh;">
+                    <p id="lightboxCaption" class="text-white-50 mb-0 px-3"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="mb-3">
+                <a href="#" class="text-white mx-2 fs-5"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-white mx-2 fs-5"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="text-white mx-2 fs-5"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="text-white mx-2 fs-5"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+            <p class="mb-0 text-white-50">&copy; 2026 Ekstrakurikuler Paskibra Satuan. Dibuat dengan semangat merah putih.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter functionality
+        function filterGallery(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Lightbox modal functionality
+        function openLightbox(imageSrc, captionText) {
+            document.getElementById('lightboxImage').src = imageSrc;
+            document.getElementById('lightboxCaption').textContent = captionText;
+            const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+            lightboxModal.show();
+        }
+    </script>
+</body>
